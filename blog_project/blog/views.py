@@ -11,8 +11,8 @@ def home(request):
     }
     return render(request, "blog/home.html", context)
 
-def about(request):
-    return render(request, "blog/about.html", {'title': 'About'})
+def article(request):
+    return render(request, "blog/article.html", {})
 
 def post_list(request):
     posts = Post.objects.all()
