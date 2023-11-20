@@ -14,3 +14,6 @@ def home(request):
 def about(request):
     return render(request, "blog/about.html", {'title': 'About'})
 
+def post_list(request):
+    posts = Post.objects.all()
+    return render(request, "blog/post.list.html", {'posts': post_list})
