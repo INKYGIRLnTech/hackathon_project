@@ -5,13 +5,13 @@
         <form method="POST">
             {% csrf_token %}
             <fieldset>
-                <legend class="">Delete Post</legend>
+                <legend class="border-bottom mb-4">Delete Post</legend>
                 <h2>Are you sure you want to delete the post "{{ object.title }}"</h2>
                 
             </fieldset>
             <div classs="">
-                <button class="" type="submit">Delete</button>
-                <button type="submit" href="{% url 'post-detail' object.id %}">Cancel</button>
+                <button class="btn btn-outline-danger" type="submit">Delete</button>
+                <button class="btn btn-outline-secondary" type="submit" href="{% url 'post-detail' object.id %}">Cancel</button>
             </div>
         </form>
        

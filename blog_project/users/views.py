@@ -18,5 +18,5 @@ def register(request):
 
 
 @login_required
-def user_profile(request):
-    return render(request, 'users/user_profile.html')
+def profile(request):
+    return render(request, 'users/profile.html')
