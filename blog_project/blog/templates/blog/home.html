@@ -6,12 +6,12 @@
         <div class="media-body">
           <div class="article-metadata">
             <a class="mr-2" href="{% url 'profile-detail' post.author.pk %}">{{ post.author }}
-              <img src="{{ post.author.image.url }}" class="rounded-circle" width="50" height="50"> 
+              <img src="{{ post.author.profile.image.url }}" class="rounded-circle" width="50" height="50"> 
             </a>
             <small class="text-muted">{{ post.date_posted }}</small>
           </div>
           <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-          <h3>{{ post.genre }}</h3>
+          <h4 class="article-content">{{ post.genre }}</h4>
           <p class="article-content">{{ post.content }}</p>
         </div>
       </article>
