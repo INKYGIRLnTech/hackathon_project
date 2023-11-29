@@ -4,11 +4,21 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 # Create your models here.
+class Genre(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content=models.TextField()
-    date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True, blank=True)
+    date_posted = models.DateTimeField(default=timezone.now)
+   
+    
     
 
     def __str__(self):
@@ -18,11 +28,6 @@ class Post(models.Model):
         return reverse('post-detail', kwargs={'pk': self.pk})
     
 
-class Genre(models.Model):
-    name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name
     
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
