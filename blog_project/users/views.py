@@ -2,8 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import UserRegisterForm
-from django.views.generic import DetailView
+from django.views.generic import DetailView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
+from .models import Profile
+from .forms import ProfileUpdateForm
+from django.urls import reverse_lazy
 
 # Create your views here.
 def register(request):
@@ -27,3 +31,21 @@ class ProfileView(DetailView):
     model = User
     template_name = 'users/profile.html'
     context_object_name = 'user'
+
+
+class ProfileUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Profile
+    form_class = ProfileUpdateForm
+    template_name ='users/profile_update.html'
+    success_url = reverse_lazy('profile')
+
+    def get_object(self, queryset=None):
+        return self.request.user.profile
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+    
+    def test_func(self):
+        profile = self.get_object()
+        return self.request.user == profile.user
