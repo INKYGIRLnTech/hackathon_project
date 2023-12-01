@@ -82,3 +82,7 @@ body {
   .account-heading {
     font-size: 2.5rem;
   }
+  
+  .navbar-toggle-icon {
+    color:#890606
+  }
